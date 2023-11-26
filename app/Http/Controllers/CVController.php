@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CV;
 use Illuminate\Http\Request;
-
+use \PDF;
 class CVController extends Controller
 {
     public function index()
@@ -36,16 +36,19 @@ class CVController extends Controller
         return response()->json(null, 204);
     }
 
-    public function generatePDF($cvId)
-    {
-        $cv = CV::find($cvId);
+    public function generatePDF(Request $request)
+    { 
+        $data = [
+            'user_id' => 1,
+            'experience' => '+2 Full Stack Developer chez Xsofwtare',
+            'competences' => 'php , laravel , vue , angular , springboot ,symfony',
+            'formation' => 'bac +5 diplome ingenieur en informatique',
+            'autres_informations' => 'certifée depuit google',
+        ];
 
-        if (!$cv) {
-            abort(404);
-        }
-
-        $pdf = app('dompdf.wrapper')->loadView('layout', ['cv' => $cv]);
+        $pdf = PDF::loadView('layout', $data);
 
         return $pdf->download('cv.pdf');
     }
+
 }

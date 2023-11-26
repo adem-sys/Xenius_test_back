@@ -15,6 +15,7 @@ class AuthController extends Controller
     * @param  [string] name
     * @param  [string] email
     * @param  [string] password
+    * @param  [string] role
     * @param  [string] password_confirmation
     * @return [string] message
     */
@@ -25,6 +26,7 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|string|unique:users',
             'password' => 'required|string',
+            'role' => $request->role,
             'c_password' => 'required|same:password'
         ]);
     
@@ -32,6 +34,7 @@ class AuthController extends Controller
             'name'  => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'role' => $request->role,
         ]);
 
         if($user->save()){

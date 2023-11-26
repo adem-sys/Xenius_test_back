@@ -28,7 +28,6 @@ use App\Http\Controllers\CVController;
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{user}', [UserController::class, 'show']);
     Route::post('/users', [UserController::class, 'store']);
@@ -41,10 +40,11 @@ use App\Http\Controllers\CVController;
     Route::put('/offres-emploi/{offreEmploi}', [OffreEmploiController::class, 'update']);
     Route::delete('/offres-emploi/{offreEmploi}', [OffreEmploiController::class, 'destroy']);
 
-    Route::get('/cvs', [CVController::class, 'index']);
+    Route::get('/cvs', [UserController::class, 'enregistrerCV']);
     Route::get('/cvs/{cv}', [CVController::class, 'show']);
     Route::post('/cvs', [CVController::class, 'store']);
     Route::put('/cvs/{cv}', [CVController::class, 'update']);
     Route::delete('/cvs/{cv}', [CVController::class, 'destroy']);
-});
+    Route::get('/pdf', [CVController::class, 'generatePDF']);
 
+});

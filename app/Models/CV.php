@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CV extends Model
+class Cv extends Model
 {
     use HasFactory;
+
+    protected $table = 'cvs';
 
     protected $fillable = [
         'user_id', 
@@ -15,6 +17,7 @@ class CV extends Model
         'competences',
         'formation',
         'autres_informations',
+        'cv_path'
     ];
 
     public function utilisateur()

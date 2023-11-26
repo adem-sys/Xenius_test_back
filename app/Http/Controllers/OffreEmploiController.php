@@ -19,7 +19,6 @@ class OffreEmploiController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
         $offreEmploi = OffreEmploi::create($request->all());
         return response()->json(['offreEmploi' => $offreEmploi], 201);
     }
